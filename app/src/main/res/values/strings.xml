@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">BluetoothChat</string>
+    <string name="app_name">Bluetooth chat</string>
+    <string name="title_activity_select_device">Device select</string>
+    <string name="title_activity_chat_window">Chat window</string>
+    <string name="Device_select">Device select</string>
+    <string name="Turn_visibility">Turn visibility</string>
+    <string name="Listen_for_connection">Listen for connection</string>
+    <string name="Discover">Discover</string>
+    <string name="Connect">Connect</string>
+    <string name="Write">Write…</string>
+    <string name="Send">Send</string>
+    <string name="Connect_to">Connect to:\u0020</string>
+    <string name="Chat_with">Chat with</string>
+    <string name="PairedAndFound_subtitle">Paired devices ---------------------------- Found devices</string>
 </resources>

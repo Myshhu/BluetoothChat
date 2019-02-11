@@ -12,26 +12,26 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Thread rcvConnectionThread;
     AsyncTask rcvConnectionASTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        checkBluetoothStatus();
     }
 
     public void btnSelectDeviceClick(View v) {
         //Launch SelectDeviceActivity
+        checkBluetoothStatus();
+        Intent intent = new Intent(this, SelectDeviceActivity.class);
+        startActivity(intent);
     }
 
     public void btnListenForConnectionClick(View v) {
         //Check if Bluetooth is turned on
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(!bluetoothAdapter.isEnabled()){
-            Intent enableBt = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBt, 100);
-        }
+        checkBluetoothStatus();
 
         //Init dialog
         ProgressDialog progressDialog = new ProgressDialog(this);
@@ -46,5 +46,13 @@ public class MainActivity extends AppCompatActivity {
         rcvConnectionASTask = new RcvConnectionASyncTask(progressDialog);
         rcvConnectionASTask.execute();
         progressDialog.show();
+    }
+
+    private void checkBluetoothStatus() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(!bluetoothAdapter.isEnabled()){
+            Intent enableBt = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBt, 100);
+        }
     }
 }
