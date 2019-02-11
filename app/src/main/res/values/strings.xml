@@ -10,6 +10,6 @@
     <string name="Write">Write…</string>
     <string name="Send">Send</string>
     <string name="Connect_to">Connect to:\u0020</string>
-    <string name="Chat_with">Chat with</string>
+    <string name="Chat_with">Chat with\u0020</string>
     <string name="PairedAndFound_subtitle">Paired devices ---------------------------- Found devices</string>
 </resources>

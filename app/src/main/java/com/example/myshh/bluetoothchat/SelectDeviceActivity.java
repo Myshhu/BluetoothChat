@@ -26,6 +26,8 @@ public class SelectDeviceActivity extends AppCompatActivity {
 
     BluetoothAdapter mBluetoothAdapter;
 
+    Thread connectingThread;
+
     ListView pairedDevices;
     ListView foundDevices;
 
@@ -178,7 +180,6 @@ public class SelectDeviceActivity extends AppCompatActivity {
                 return device;
             }
         }
-
         for (BluetoothDevice device : foundDevicesSet) {
             if(device.getAddress().equals(MAC)){
                 return device;
@@ -224,7 +225,8 @@ public class SelectDeviceActivity extends AppCompatActivity {
     }
 
     public void btnConnect(View v){
-        if(SocketStorage.getSocket()!=null){
+        //Close current connection
+        if(SocketStorage.getSocket() != null){
             try {
                 SocketStorage.getSocket().close();
                 SocketStorage.setSocket(null);
@@ -238,8 +240,19 @@ public class SelectDeviceActivity extends AppCompatActivity {
             connectToDeviceThread = new ConnectToDeviceThread(device);
             connectToDeviceThread.start();
 
+            //While loop blocks activity
             while (SocketStorage.getSocket() == null);
             //Start ChatActivity
+            Intent intent = new Intent(this, ChatWindowActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (connectToDeviceThread != null) {
+            connectToDeviceThread.cancel();
         }
     }
 
@@ -248,7 +261,6 @@ public class SelectDeviceActivity extends AppCompatActivity {
             int permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
             permissionCheck += this.checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION");
             if (permissionCheck != 0) {
-
                 this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 11);
             }
         }

@@ -36,7 +36,7 @@ public class ConnectToDeviceThread extends Thread {
         }
     }
 
-    public void cancel(){
+    void cancel(){
         try {
             mmSocket.close();
         } catch (IOException e){

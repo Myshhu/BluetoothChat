@@ -23,7 +23,9 @@
         <activity
             android:name=".SelectDeviceActivity"
             android:label="@string/title_activity_select_device"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ChatWindowActivity" />
     </application>
 
 </manifest>
